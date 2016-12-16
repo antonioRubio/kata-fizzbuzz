@@ -1,7 +1,7 @@
 var assert = require('assert');
 var sinon = require('sinon');
 var FizzBuzz = require('../fizzbuzz');
-var DatabaseFake = require('./DatabaseFake');
+//var DatabaseFake = require('./DatabaseFake');
 
 suite('Print', function() {
 
@@ -9,6 +9,7 @@ suite('Print', function() {
         var database = {
             getStringWhenThreeNumber : function () {}
         };
+        sinon.stub(database, 'getStringWhenThreeNumber').returns('Fizz');
         this.fizzBuzz = new FizzBuzz(database);
     });
 
