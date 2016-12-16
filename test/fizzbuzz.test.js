@@ -6,11 +6,13 @@ var FizzBuzz = require('../fizzbuzz');
 suite('Print', function() {
 
     setup(function() {
-        var database = {
+        this.database = {
+            initConnection : function () {},
             getStringWhenThreeNumber : function () {}
         };
-        sinon.stub(database, 'getStringWhenThreeNumber').returns('Fizz');
-        this.fizzBuzz = new FizzBuzz(database);
+        sinon.spy(this.database, 'initConnection');
+        sinon.stub(this.database, 'getStringWhenThreeNumber').returns('Fizz');
+        this.fizzBuzz = new FizzBuzz(this.database);
     });
 
     test('return 1 when print number "1"', function() {
@@ -42,6 +44,7 @@ suite('Print', function() {
         //Act
         var result = this.fizzBuzz.print(3);
         //Assert
+        assert.ok(this.database.initConnection.called);
         assert.equal(result, 'Fizz');
     });
 });

@@ -5,6 +5,7 @@ module.exports = function FizzBuzz(database) {
         checkIsInteger(number);
         var result  = number;
         if (isFizz(number)) {
+            database.initConnection();
             result =  this.database.getStringWhenThreeNumber();
         }
 
